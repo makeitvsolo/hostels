@@ -47,7 +47,7 @@ public final class Hostel {
         this.tenants = new HashSet<>();
     }
 
-    public List<Member> tenants() {
+    public List<Member> getTenants() {
         return tenants.stream()
                        .toList();
     }
