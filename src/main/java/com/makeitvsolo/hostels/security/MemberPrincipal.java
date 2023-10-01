@@ -7,13 +7,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 
-public final class MemberDetails implements UserDetails {
+public final class MemberPrincipal implements UserDetails {
 
     private Long id;
     private String name;
     private String password;
 
-    public MemberDetails(Long id, String name, String password) {
+    public MemberPrincipal(Long id, String name, String password) {
         this.id = id;
         this.name = name;
         this.password = password;
