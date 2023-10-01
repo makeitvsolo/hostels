@@ -10,8 +10,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 @Component
-public class UnathorizedHandler implements AuthenticationEntryPoint {
-
+public class UnauthorizedHandler implements AuthenticationEntryPoint {
 
     @Override
     public void commence(

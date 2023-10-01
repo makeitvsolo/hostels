@@ -2,7 +2,7 @@ package com.makeitvsolo.hostels.security;
 
 import com.makeitvsolo.hostels.repository.MemberRepository;
 import com.makeitvsolo.hostels.security.jwt.JwtAuthenticationFilter;
-import com.makeitvsolo.hostels.security.jwt.UnathorizedHandler;
+import com.makeitvsolo.hostels.security.jwt.UnauthorizedHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,16 +26,16 @@ public class SecurityConfig {
 
     private final MemberRepository memberRepository;
     private final JwtAuthenticationFilter authFilter;
-    private final UnathorizedHandler unathorizedHandler;
+    private final UnauthorizedHandler unauthorizedHandler;
 
     public SecurityConfig(
             MemberRepository memberRepository,
             JwtAuthenticationFilter authFilter,
-            UnathorizedHandler unathorizedHandler
+            UnauthorizedHandler unauthorizedHandler
     ) {
         this.memberRepository = memberRepository;
         this.authFilter = authFilter;
-        this.unathorizedHandler = unathorizedHandler;
+        this.unauthorizedHandler = unauthorizedHandler;
     }
 
     @Bean
@@ -58,7 +58,7 @@ public class SecurityConfig {
                        )
                        .exceptionHandling(
                                exception -> {
-                                   exception.authenticationEntryPoint(unathorizedHandler);
+                                   exception.authenticationEntryPoint(unauthorizedHandler);
                                }
                        )
                        .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
@@ -68,7 +68,7 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         return name -> memberRepository.findByName(name)
-                               .map(member -> new MemberDetails(
+                               .map(member -> new MemberPrincipal(
                                        member.getId(),
                                        member.getName(),
                                        member.getPassword()
