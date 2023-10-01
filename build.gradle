@@ -1,0 +1,22 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.1.4'
+}
+
+group = 'com.makeitvsolo'
+version = '0.1'
+sourceCompatibility = 17
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '3.1.4'
+
+    testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '3.1.4'
+}
+
+test {
+    useJUnitPlatform()
+}
