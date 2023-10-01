@@ -39,14 +39,15 @@ public final class Member {
         this.password = password;
 
         this.hostels = new HashSet<>();
+        this.residences = new HashSet<>();
     }
 
-    public List<Hostel> hostels() {
+    public List<Hostel> getHostels() {
         return hostels.stream()
                        .toList();
     }
 
-    public List<Hostel> residences() {
+    public List<Hostel> getResidences() {
         return residences.stream()
                        .toList();
     }
