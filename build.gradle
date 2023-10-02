@@ -6,6 +6,14 @@ plugins {
 group = 'com.makeitvsolo'
 version = '0.1'
 sourceCompatibility = 17
+project.buildDir = 'target'
+
+bootJar {
+    destinationDirectory = file(project.buildDir)
+    archiveBaseName = 'rainy-today'
+    version = '0.1'
+    mainClass = 'com.makeitvsolo.rainytoday.RainyTodayApplication'
+}
 
 repositories {
     mavenCentral()
