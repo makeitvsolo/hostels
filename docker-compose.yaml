@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  backend:
+    ports:
+      - "80:8080"
+    build: .
+    depends_on:
+      - postgres
+    environment:
+      SERVER_PORT: 8080
+      DB_URL: jdbc:postgresql://postgres:5432/hostels
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      JWT_SECRET_KEY: secret_key
+      JWT_EXPIRATION_MINUTES: 120
+
+  postgres:
+    ports:
+      - "5432:5432"
+    image: postgres:15.3-alpine
+    environment:
+      POSTGRES_DB: hostels
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+volumes:
+  postgres:
+    driver: local
