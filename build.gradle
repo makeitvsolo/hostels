@@ -12,7 +12,7 @@ bootJar {
     destinationDirectory = file(project.buildDir)
     archiveBaseName = 'hostels'
     version = '0.1'
-    mainClass = 'com.makeitvsolo.rainytoday.HostelsApplication'
+    mainClass = 'com.makeitvsolo.hostels.HostelsApplication'
 }
 
 repositories {
