@@ -8,6 +8,8 @@ import java.util.Optional;
 
 public interface HostelRepository extends JpaRepository<Hostel, Long> {
 
+    Optional<Hostel> findByIdAndOwner(Long id, Long ownerId);
+
     Optional<Hostel> findByName(String name);
     boolean existsByName(String name);
 
