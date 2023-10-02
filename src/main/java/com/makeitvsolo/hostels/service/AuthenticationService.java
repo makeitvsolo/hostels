@@ -2,9 +2,9 @@ package com.makeitvsolo.hostels.service;
 
 import com.makeitvsolo.hostels.dto.AccessTokenDto;
 import com.makeitvsolo.hostels.dto.MemberDto;
-import com.makeitvsolo.hostels.exception.MemberAlreadyExistsException;
-import com.makeitvsolo.hostels.exception.MemberNotFoundException;
-import com.makeitvsolo.hostels.exception.PasswordsAreNotMatchesException;
+import com.makeitvsolo.hostels.service.exception.member.MemberAlreadyExistsException;
+import com.makeitvsolo.hostels.service.exception.member.MemberNotFoundException;
+import com.makeitvsolo.hostels.service.exception.member.PasswordsAreNotMatchesException;
 import com.makeitvsolo.hostels.model.Member;
 import com.makeitvsolo.hostels.repository.MemberRepository;
 import com.makeitvsolo.hostels.service.security.JwtProvider;

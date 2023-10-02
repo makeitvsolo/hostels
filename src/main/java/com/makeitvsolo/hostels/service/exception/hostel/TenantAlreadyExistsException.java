@@ -1,4 +1,4 @@
-package com.makeitvsolo.hostels.exception;
+package com.makeitvsolo.hostels.service.exception.hostel;
 
 import com.makeitvsolo.hostels.common.exception.HostelsException;
 

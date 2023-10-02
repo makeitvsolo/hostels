@@ -2,9 +2,9 @@ package com.makeitvsolo.hostels.controller;
 
 import com.makeitvsolo.hostels.dto.ErrorMessageDto;
 import com.makeitvsolo.hostels.common.exception.HostelsException;
-import com.makeitvsolo.hostels.exception.MemberAlreadyExistsException;
-import com.makeitvsolo.hostels.exception.MemberNotFoundException;
-import com.makeitvsolo.hostels.exception.PasswordsAreNotMatchesException;
+import com.makeitvsolo.hostels.service.exception.member.MemberAlreadyExistsException;
+import com.makeitvsolo.hostels.service.exception.member.MemberNotFoundException;
+import com.makeitvsolo.hostels.service.exception.member.PasswordsAreNotMatchesException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
