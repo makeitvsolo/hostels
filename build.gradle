@@ -10,9 +10,9 @@ project.buildDir = 'target'
 
 bootJar {
     destinationDirectory = file(project.buildDir)
-    archiveBaseName = 'rainy-today'
+    archiveBaseName = 'hostels'
     version = '0.1'
-    mainClass = 'com.makeitvsolo.rainytoday.RainyTodayApplication'
+    mainClass = 'com.makeitvsolo.rainytoday.HostelsApplication'
 }
 
 repositories {
