@@ -1,7 +1,7 @@
 package com.makeitvsolo.hostels.controller;
 
-import com.makeitvsolo.hostels.dto.AccessTokenDto;
-import com.makeitvsolo.hostels.dto.MemberDto;
+import com.makeitvsolo.hostels.service.dto.member.AccessTokenDto;
+import com.makeitvsolo.hostels.service.dto.member.MemberDto;
 import com.makeitvsolo.hostels.service.AuthenticationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

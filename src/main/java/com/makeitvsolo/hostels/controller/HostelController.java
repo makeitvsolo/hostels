@@ -1,7 +1,7 @@
 package com.makeitvsolo.hostels.controller;
 
-import com.makeitvsolo.hostels.dto.HostelDto;
-import com.makeitvsolo.hostels.dto.HostelItemDto;
+import com.makeitvsolo.hostels.service.dto.hostel.HostelDto;
+import com.makeitvsolo.hostels.service.dto.hostel.HostelItemDto;
 import com.makeitvsolo.hostels.security.MemberPrincipal;
 import com.makeitvsolo.hostels.service.HostelService;
 import com.makeitvsolo.hostels.service.TenantService;

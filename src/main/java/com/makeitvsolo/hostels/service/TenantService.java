@@ -1,7 +1,7 @@
 package com.makeitvsolo.hostels.service;
 
-import com.makeitvsolo.hostels.dto.HostelDto;
-import com.makeitvsolo.hostels.dto.TenantDto;
+import com.makeitvsolo.hostels.service.dto.hostel.HostelDto;
+import com.makeitvsolo.hostels.service.dto.hostel.TenantDto;
 import com.makeitvsolo.hostels.service.exception.hostel.HostelNotFoundException;
 import com.makeitvsolo.hostels.service.exception.member.MemberNotFoundException;
 import com.makeitvsolo.hostels.service.exception.hostel.TenantAlreadyExistsException;

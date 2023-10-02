@@ -1,4 +1,4 @@
-package com.makeitvsolo.hostels.dto;
+package com.makeitvsolo.hostels.service.dto.member;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
