@@ -1,7 +1,9 @@
 package com.makeitvsolo.hostels.service.security;
 
+import java.util.Optional;
+
 public interface JwtProvider {
 
     String encode(String subject);
-    String decodeSubject(String token);
+    Optional<String> decodeSubject(String token);
 }
