@@ -39,7 +39,7 @@ public final class HostelService {
             throw new MemberNotFoundException();
         }
 
-        return hostelRepository.findAllByOwner(ownerId)
+        return hostelRepository.findAllByOwnerId(ownerId)
                        .stream()
                        .map(hostel -> new HostelItemDto(
                                hostel.getId(),

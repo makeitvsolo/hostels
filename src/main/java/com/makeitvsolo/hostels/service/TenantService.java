@@ -22,7 +22,7 @@ public final class TenantService {
     }
 
     public void addTenant(Long ownerId, Long hostelId, String memberName) {
-        hostelRepository.findByIdAndOwner(hostelId, ownerId)
+        hostelRepository.findByIdAndOwnerId(hostelId, ownerId)
                 .ifPresentOrElse(hostel -> {
                     var tenant = memberRepository.findByName(memberName)
                                          .orElseThrow(() -> new MemberNotFoundException(memberName));
@@ -39,7 +39,7 @@ public final class TenantService {
     }
 
     public void removeTenant(Long ownerId, Long hostelId, Long tenantId) {
-        hostelRepository.findByIdAndOwner(hostelId, ownerId)
+        hostelRepository.findByIdAndOwnerId(hostelId, ownerId)
                 .ifPresentOrElse(hostel -> {
                     var success = hostel.removeTenant(tenantId);
                     if (!success) {
@@ -53,7 +53,7 @@ public final class TenantService {
     }
 
     public HostelDto getAllTenants(Long ownerId, Long hostelId) {
-        return hostelRepository.findByIdAndOwner(hostelId, ownerId)
+        return hostelRepository.findByIdAndOwnerId(hostelId, ownerId)
                        .map(hostel -> new HostelDto(
                                hostel.getId(),
                                hostel.getName(),

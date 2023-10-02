@@ -45,7 +45,7 @@ public final class AuthenticationService {
         var member = memberRepository.findByName(payload.getName())
                              .orElseThrow(() -> new MemberNotFoundException(payload.getName()));
 
-        if (passwordEncoder.matches(payload.getPassword(), member.getPassword())) {
+        if (!passwordEncoder.matches(payload.getPassword(), member.getPassword())) {
             throw new PasswordsAreNotMatchesException();
         }
 
