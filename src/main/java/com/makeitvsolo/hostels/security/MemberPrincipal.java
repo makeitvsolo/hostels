@@ -24,6 +24,10 @@ public final class MemberPrincipal implements UserDetails {
         return Collections.singletonList(new SimpleGrantedAuthority("Member"));
     }
 
+    public Long getId() {
+        return id;
+    }
+
     @Override
     public String getPassword() {
         return password;
