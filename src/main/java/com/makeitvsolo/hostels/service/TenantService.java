@@ -21,19 +21,21 @@ public final class TenantService {
         this.memberRepository = memberRepository;
     }
 
-    public void addTenant(Long ownerId, Long hostelId, String tenantName) {
+    public void addTenant(Long ownerId, Long hostelId, String memberName) {
         hostelRepository.findByIdAndOwner(hostelId, ownerId)
                 .ifPresentOrElse(hostel -> {
-                    var tenant = memberRepository.findByName(tenantName)
-                                         .orElseThrow(() -> new MemberNotFoundException(tenantName));
+                    var tenant = memberRepository.findByName(memberName)
+                                         .orElseThrow(() -> new MemberNotFoundException(memberName));
 
                     var success = hostel.addTenant(tenant);
                     if (!success) {
-                        throw new TenantAlreadyExistsException(tenantName);
+                        throw new TenantAlreadyExistsException(memberName);
                     }
 
                     hostelRepository.save(hostel);
-                }, HostelNotFoundException::new);
+                }, () -> {
+                    throw new HostelNotFoundException();
+                });
     }
 
     public void removeTenant(Long ownerId, Long hostelId, Long tenantId) {
@@ -45,7 +47,9 @@ public final class TenantService {
                     }
 
                     hostelRepository.save(hostel);
-                }, HostelNotFoundException::new);
+                }, () -> {
+                    throw new HostelNotFoundException();
+                });
     }
 
     public HostelDto getAllTenants(Long ownerId, Long hostelId) {
