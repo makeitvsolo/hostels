@@ -1,6 +1,6 @@
 package com.makeitvsolo.hostels.controller;
 
-import com.makeitvsolo.hostels.dto.ErrorMessage;
+import com.makeitvsolo.hostels.dto.ErrorMessageDto;
 import com.makeitvsolo.hostels.exception.HostelsException;
 import com.makeitvsolo.hostels.exception.MemberAlreadyExistsException;
 import com.makeitvsolo.hostels.exception.MemberNotFoundException;
@@ -15,18 +15,18 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class RestExceptionMapper extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = {MemberAlreadyExistsException.class})
-    public ResponseEntity<ErrorMessage> handleMemberAlreadyExists(
+    public ResponseEntity<ErrorMessageDto> handleMemberAlreadyExists(
             HostelsException ex
     ) {
         return ResponseEntity.status(HttpStatus.CONFLICT)
-                       .body(new ErrorMessage(ex.getMessage()));
+                       .body(new ErrorMessageDto(ex.getMessage()));
     }
 
     @ExceptionHandler(value = {MemberNotFoundException.class, PasswordsAreNotMatchesException.class})
-    public ResponseEntity<ErrorMessage> handleAuthenticationException(
+    public ResponseEntity<ErrorMessageDto> handleAuthenticationException(
             HostelsException ex
     ) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                       .body(new ErrorMessage(ex.getMessage()));
+                       .body(new ErrorMessageDto(ex.getMessage()));
     }
 }
