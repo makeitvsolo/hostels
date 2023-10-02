@@ -1,7 +1,7 @@
 package com.makeitvsolo.hostels.controller;
 
 import com.makeitvsolo.hostels.dto.ErrorMessageDto;
-import com.makeitvsolo.hostels.exception.HostelsException;
+import com.makeitvsolo.hostels.common.exception.HostelsException;
 import com.makeitvsolo.hostels.exception.MemberAlreadyExistsException;
 import com.makeitvsolo.hostels.exception.MemberNotFoundException;
 import com.makeitvsolo.hostels.exception.PasswordsAreNotMatchesException;
