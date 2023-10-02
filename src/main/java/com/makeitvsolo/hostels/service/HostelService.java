@@ -2,6 +2,7 @@ package com.makeitvsolo.hostels.service;
 
 import com.makeitvsolo.hostels.dto.HostelItemDto;
 import com.makeitvsolo.hostels.exception.HostelAlreadyExistsException;
+import com.makeitvsolo.hostels.exception.MemberAlreadyExistsException;
 import com.makeitvsolo.hostels.exception.MemberNotFoundException;
 import com.makeitvsolo.hostels.model.Hostel;
 import com.makeitvsolo.hostels.repository.HostelRepository;
@@ -35,6 +36,10 @@ public final class HostelService {
     }
 
     public List<HostelItemDto> getAll(Long ownerId) {
+        if (!memberRepository.existsById(ownerId)) {
+            throw new MemberNotFoundException();
+        }
+
         return hostelRepository.findAllByOwner(ownerId)
                        .stream()
                        .map(hostel -> new HostelItemDto(
