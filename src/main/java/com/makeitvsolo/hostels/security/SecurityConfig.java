@@ -26,16 +26,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class SecurityConfig {
 
-    private final MemberRepository memberRepository;
     private final JwtAuthenticationFilter authFilter;
     private final UnauthorizedHandler unauthorizedHandler;
 
     public SecurityConfig(
-            MemberRepository memberRepository,
             JwtAuthenticationFilter authFilter,
             UnauthorizedHandler unauthorizedHandler
     ) {
-        this.memberRepository = memberRepository;
         this.authFilter = authFilter;
         this.unauthorizedHandler = unauthorizedHandler;
     }
@@ -65,41 +62,5 @@ public class SecurityConfig {
                        )
                        .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
                        .build();
-    }
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return name -> memberRepository.findByName(name)
-                               .map(member -> new MemberPrincipal(
-                                       member.getId(),
-                                       member.getName(),
-                                       member.getPassword()
-                               ))
-                               .orElseThrow(() -> new UsernameNotFoundException(name));
-    }
-
-    @Bean
-    public AuthenticationProvider authenticationProvider() {
-        var provider = new DaoAuthenticationProvider();
-
-        provider.setUserDetailsService(userDetailsService());
-        provider.setPasswordEncoder(passwordEncoder());
-
-        return provider;
-    }
-
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
-        return configuration.getAuthenticationManager();
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public JwtProvider jwtProvider() {
-        return new BaseJwtProvider();
     }
 }

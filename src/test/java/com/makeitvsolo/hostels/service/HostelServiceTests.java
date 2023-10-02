@@ -138,7 +138,7 @@ public class HostelServiceTests {
 
             when(memberRepository.existsById(ownerId))
                     .thenReturn(true);
-            when(hostelRepository.findAllByOwner(ownerId))
+            when(hostelRepository.findAllByOwnerId(ownerId))
                     .thenReturn(List.of(existingHostel));
 
             assertEquals(expected, service.getAll(ownerId));

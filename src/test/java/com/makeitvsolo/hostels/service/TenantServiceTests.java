@@ -78,7 +78,7 @@ public class TenantServiceTests {
             var hostelId = 0L;
             var memberName = "member name";
 
-            when(hostelRepository.findByIdAndOwner(hostelId, ownerId))
+            when(hostelRepository.findByIdAndOwnerId(hostelId, ownerId))
                     .thenReturn(Optional.of(hostel));
             when(memberRepository.findByName(memberName))
                     .thenReturn(Optional.of(existingMember));
@@ -97,7 +97,7 @@ public class TenantServiceTests {
             var hostelId = 0L;
             var memberName = "member name";
 
-            when(hostelRepository.findByIdAndOwner(hostelId, ownerId))
+            when(hostelRepository.findByIdAndOwnerId(hostelId, ownerId))
                     .thenReturn(Optional.empty());
 
             assertThrows(HostelNotFoundException.class, () -> service.addTenant(ownerId, hostelId, memberName));
@@ -110,7 +110,7 @@ public class TenantServiceTests {
             var hostelId = 0L;
             var memberName = "member name";
 
-            when(hostelRepository.findByIdAndOwner(hostelId, ownerId))
+            when(hostelRepository.findByIdAndOwnerId(hostelId, ownerId))
                     .thenReturn(Optional.of(hostel));
             when(memberRepository.findByName(memberName))
                     .thenReturn(Optional.empty());
@@ -125,7 +125,7 @@ public class TenantServiceTests {
             var hostelId = 0L;
             var memberName = "member name";
 
-            when(hostelRepository.findByIdAndOwner(hostelId, ownerId))
+            when(hostelRepository.findByIdAndOwnerId(hostelId, ownerId))
                     .thenReturn(Optional.of(hostel));
             when(memberRepository.findByName(memberName))
                     .thenReturn(Optional.of(existingMember));
@@ -168,7 +168,7 @@ public class TenantServiceTests {
             var hostelId = 0L;
             var tenantId = 1L;
 
-            when(hostelRepository.findByIdAndOwner(hostelId, ownerId))
+            when(hostelRepository.findByIdAndOwnerId(hostelId, ownerId))
                     .thenReturn(Optional.of(hostel));
             when(hostel.removeTenant(tenantId))
                     .thenReturn(true);
@@ -185,7 +185,7 @@ public class TenantServiceTests {
             var hostelId = 0L;
             var tenantId = 1L;
 
-            when(hostelRepository.findByIdAndOwner(hostelId, ownerId))
+            when(hostelRepository.findByIdAndOwnerId(hostelId, ownerId))
                     .thenReturn(Optional.empty());
 
             assertThrows(HostelNotFoundException.class, () -> service.removeTenant(ownerId, hostelId, tenantId));
@@ -198,7 +198,7 @@ public class TenantServiceTests {
             var hostelId = 0L;
             var tenantId = 1L;
 
-            when(hostelRepository.findByIdAndOwner(hostelId, ownerId))
+            when(hostelRepository.findByIdAndOwnerId(hostelId, ownerId))
                     .thenReturn(Optional.of(hostel));
             when(hostel.removeTenant(tenantId))
                     .thenReturn(false);
@@ -246,7 +246,7 @@ public class TenantServiceTests {
                     List.of(new TenantDto(existingTenant.getId(), existingTenant.getName()))
             );
 
-            when(hostelRepository.findByIdAndOwner(hostelId, ownerId))
+            when(hostelRepository.findByIdAndOwnerId(hostelId, ownerId))
                     .thenReturn(Optional.of(hostel));
 
             assertEquals(expected, service.getAllTenants(ownerId, hostelId));
@@ -258,7 +258,7 @@ public class TenantServiceTests {
             var ownerId = 0L;
             var hostelId = 0L;
 
-            when(hostelRepository.findByIdAndOwner(hostelId, ownerId))
+            when(hostelRepository.findByIdAndOwnerId(hostelId, ownerId))
                     .thenReturn(Optional.empty());
 
             assertThrows(HostelNotFoundException.class, () -> service.getAllTenants(ownerId, hostelId));
