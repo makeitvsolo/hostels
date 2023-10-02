@@ -8,7 +8,9 @@ import com.makeitvsolo.hostels.exception.TenantAlreadyExistsException;
 import com.makeitvsolo.hostels.exception.TenantNotFoundException;
 import com.makeitvsolo.hostels.repository.HostelRepository;
 import com.makeitvsolo.hostels.repository.MemberRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public final class TenantService {
 
     private final HostelRepository hostelRepository;
