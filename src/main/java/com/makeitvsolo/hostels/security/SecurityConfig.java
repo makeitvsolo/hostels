@@ -1,8 +1,10 @@
 package com.makeitvsolo.hostels.security;
 
 import com.makeitvsolo.hostels.repository.MemberRepository;
+import com.makeitvsolo.hostels.security.jwt.BaseJwtProvider;
 import com.makeitvsolo.hostels.security.jwt.JwtAuthenticationFilter;
 import com.makeitvsolo.hostels.security.jwt.UnauthorizedHandler;
+import com.makeitvsolo.hostels.service.security.JwtProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -94,5 +96,10 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public JwtProvider jwtProvider() {
+        return new BaseJwtProvider();
     }
 }

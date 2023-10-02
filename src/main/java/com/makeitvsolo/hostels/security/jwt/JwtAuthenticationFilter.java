@@ -1,5 +1,6 @@
 package com.makeitvsolo.hostels.security.jwt;
 
+import com.makeitvsolo.hostels.service.security.JwtProvider;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

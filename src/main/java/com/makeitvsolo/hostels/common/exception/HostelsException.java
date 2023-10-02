@@ -1,4 +1,4 @@
-package com.makeitvsolo.hostels.exception;
+package com.makeitvsolo.hostels.common.exception;
 
 public abstract class HostelsException extends RuntimeException {
 

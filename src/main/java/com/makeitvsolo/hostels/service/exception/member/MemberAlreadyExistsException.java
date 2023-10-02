@@ -1,4 +1,6 @@
-package com.makeitvsolo.hostels.exception;
+package com.makeitvsolo.hostels.service.exception.member;
+
+import com.makeitvsolo.hostels.common.exception.HostelsException;
 
 import java.text.MessageFormat;
 

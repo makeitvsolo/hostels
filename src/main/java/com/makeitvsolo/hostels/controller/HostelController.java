@@ -1,17 +1,21 @@
 package com.makeitvsolo.hostels.controller;
 
-import com.makeitvsolo.hostels.dto.HostelDto;
-import com.makeitvsolo.hostels.dto.HostelItemDto;
+import com.makeitvsolo.hostels.controller.response.ErrorMessageDto;
 import com.makeitvsolo.hostels.security.MemberPrincipal;
 import com.makeitvsolo.hostels.service.HostelService;
 import com.makeitvsolo.hostels.service.TenantService;
+import com.makeitvsolo.hostels.service.exception.hostel.HostelAlreadyExistsException;
+import com.makeitvsolo.hostels.service.exception.hostel.HostelNotFoundException;
+import com.makeitvsolo.hostels.service.exception.hostel.TenantAlreadyExistsException;
+import com.makeitvsolo.hostels.service.exception.hostel.TenantNotFoundException;
+import com.makeitvsolo.hostels.service.exception.member.MemberNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
+@Slf4j
 @RestController
 @RequestMapping("/api/v1/hostels")
 public class HostelController {
@@ -25,9 +29,22 @@ public class HostelController {
     }
 
     @GetMapping
-    public ResponseEntity<List<HostelItemDto>> getAll(@AuthenticationPrincipal MemberPrincipal principal) {
-        return ResponseEntity.status(HttpStatus.OK)
-                       .body(hostelService.getAll(principal.getId()));
+    public ResponseEntity<?> getAll(@AuthenticationPrincipal MemberPrincipal principal) {
+        try {
+            var hostels = hostelService.getAll(principal.getId());
+
+            log.info("gets all hostels");
+            return ResponseEntity.status(HttpStatus.OK)
+                           .body(hostels);
+        } catch (MemberNotFoundException ex) {
+            log.info(ex.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                           .body(new ErrorMessageDto(ex.getMessage()));
+        } catch (Exception ex) {
+            log.error(ex.getMessage(), ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                           .build();
+        }
     }
 
     @PostMapping
@@ -35,19 +52,47 @@ public class HostelController {
             @RequestBody String name,
             @AuthenticationPrincipal MemberPrincipal principal
     ) {
-        hostelService.create(principal.getId(), name);
+        try {
+            hostelService.create(principal.getId(), name);
 
-        return ResponseEntity.status(HttpStatus.CREATED)
-                       .build();
+            log.info("hostel created");
+            return ResponseEntity.status(HttpStatus.CREATED)
+                           .build();
+        } catch (MemberNotFoundException ex) {
+            log.info(ex.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                           .body(new ErrorMessageDto(ex.getMessage()));
+        } catch (HostelAlreadyExistsException ex) {
+            log.info(ex.getMessage());
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                           .body(new ErrorMessageDto(ex.getMessage()));
+        } catch (Exception ex) {
+            log.error(ex.getMessage(), ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                           .build();
+        }
     }
 
     @GetMapping("/{hostelId}/tenants")
-    public ResponseEntity<HostelDto> getAllTenants(
+    public ResponseEntity<?> getAllTenants(
             @PathVariable("hostelId") Long hostelId,
             @AuthenticationPrincipal MemberPrincipal principal
     ) {
-        return ResponseEntity.status(HttpStatus.OK)
-                       .body(tenantService.getAllTenants(principal.getId(), hostelId));
+        try {
+            var hostel = tenantService.getAllTenants(principal.getId(), hostelId);
+
+            log.info("gets all tenants");
+            return ResponseEntity.status(HttpStatus.OK)
+                           .body(hostel);
+        } catch (HostelNotFoundException ex) {
+            log.info(ex.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                           .body(new ErrorMessageDto(ex.getMessage()));
+        } catch (Exception ex) {
+            log.error(ex.getMessage(), ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                           .build();
+        }
     }
 
     @PostMapping("/{hostelId}/tenants")
@@ -56,10 +101,25 @@ public class HostelController {
             @PathVariable("hostelId") Long hostelId,
             @AuthenticationPrincipal MemberPrincipal principal
     ) {
-        tenantService.addTenant(principal.getId(), hostelId, memberName);
+        try {
+            tenantService.addTenant(principal.getId(), hostelId, memberName);
 
-        return ResponseEntity.status(HttpStatus.NO_CONTENT)
-                       .build();
+            log.info("adds tenant");
+            return ResponseEntity.status(HttpStatus.NO_CONTENT)
+                           .build();
+        } catch (HostelNotFoundException | MemberNotFoundException ex) {
+            log.info(ex.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                           .body(new ErrorMessageDto(ex.getMessage()));
+        } catch (TenantAlreadyExistsException ex) {
+            log.info(ex.getMessage());
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                           .body(new ErrorMessageDto(ex.getMessage()));
+        } catch (Exception ex) {
+            log.error(ex.getMessage(), ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                           .build();
+        }
     }
 
     @DeleteMapping("/{hostelId}/tenants")
@@ -68,9 +128,20 @@ public class HostelController {
             @PathVariable("hostelId") Long hostelId,
             @AuthenticationPrincipal MemberPrincipal principal
     ) {
-        tenantService.removeTenant(principal.getId(), hostelId, tenantId);
+        try {
+            tenantService.removeTenant(principal.getId(), hostelId, tenantId);
 
-        return ResponseEntity.status(HttpStatus.NO_CONTENT)
-                       .build();
+            log.info("removes tenant");
+            return ResponseEntity.status(HttpStatus.NO_CONTENT)
+                           .build();
+        } catch (HostelNotFoundException | TenantNotFoundException ex) {
+            log.info(ex.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                           .body(new ErrorMessageDto(ex.getMessage()));
+        } catch (Exception ex) {
+            log.error(ex.getMessage(), ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                           .build();
+        }
     }
 }

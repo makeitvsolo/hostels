@@ -1,11 +1,11 @@
 package com.makeitvsolo.hostels.service;
 
-import com.makeitvsolo.hostels.dto.HostelDto;
-import com.makeitvsolo.hostels.dto.TenantDto;
-import com.makeitvsolo.hostels.exception.HostelNotFoundException;
-import com.makeitvsolo.hostels.exception.MemberNotFoundException;
-import com.makeitvsolo.hostels.exception.TenantAlreadyExistsException;
-import com.makeitvsolo.hostels.exception.TenantNotFoundException;
+import com.makeitvsolo.hostels.service.dto.hostel.HostelDto;
+import com.makeitvsolo.hostels.service.dto.hostel.TenantDto;
+import com.makeitvsolo.hostels.service.exception.hostel.HostelNotFoundException;
+import com.makeitvsolo.hostels.service.exception.member.MemberNotFoundException;
+import com.makeitvsolo.hostels.service.exception.hostel.TenantAlreadyExistsException;
+import com.makeitvsolo.hostels.service.exception.hostel.TenantNotFoundException;
 import com.makeitvsolo.hostels.model.Hostel;
 import com.makeitvsolo.hostels.model.Member;
 import com.makeitvsolo.hostels.repository.HostelRepository;

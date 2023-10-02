@@ -1,9 +1,8 @@
 package com.makeitvsolo.hostels.service;
 
-import com.makeitvsolo.hostels.dto.HostelItemDto;
-import com.makeitvsolo.hostels.exception.HostelAlreadyExistsException;
-import com.makeitvsolo.hostels.exception.MemberAlreadyExistsException;
-import com.makeitvsolo.hostels.exception.MemberNotFoundException;
+import com.makeitvsolo.hostels.service.dto.hostel.HostelItemDto;
+import com.makeitvsolo.hostels.service.exception.hostel.HostelAlreadyExistsException;
+import com.makeitvsolo.hostels.service.exception.member.MemberNotFoundException;
 import com.makeitvsolo.hostels.model.Hostel;
 import com.makeitvsolo.hostels.repository.HostelRepository;
 import com.makeitvsolo.hostels.repository.MemberRepository;

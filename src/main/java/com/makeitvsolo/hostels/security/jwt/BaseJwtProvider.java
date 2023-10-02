@@ -3,6 +3,7 @@ package com.makeitvsolo.hostels.security.jwt;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.makeitvsolo.hostels.service.security.JwtProvider;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -11,7 +12,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 
 @Service
-public final class JwtProvider {
+public final class BaseJwtProvider implements JwtProvider {
 
     private String secretKey;
     private Long expirationInMinutes;
